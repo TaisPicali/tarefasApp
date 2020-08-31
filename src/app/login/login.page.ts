@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -18,7 +17,7 @@ export class LoginPage implements OnInit {
     ],
     senha: [
       {tipo:'required', mensagem:'O campo Senha é obrigatório!'},
-      {tipo: 'minLenght', mensagem: 'A senha deve ter pelo menos 6 caracteres!'}
+      {tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres!'}
     ]
   }
 

@@ -42,3 +42,9 @@
 ion-input, ion-datetime, ion-select{
     color: #3c4861 !important;
 }
+
+.msg-erro{
+    color: var(--ion-color-dark);
+    font-weight: bold;
+    font-size: 11px;
+}
