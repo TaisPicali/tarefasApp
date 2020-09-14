@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CpfValidator } from '../validators/cpf-validator';
 import { ComparacaoValidator } from '../validators/comparacao-validator';
+import { UsuarioService } from '../services/usuario.service';
+import { AlertController } from '@ionic/angular';
+import { Usuario } from '../models/Usuario';
 
 @Component({
   selector: 'app-registro',
@@ -57,7 +60,10 @@ public mensagens_validacao = {
 }
 
   constructor(private formBuilder: FormBuilder,
-    private router:Router) { 
+    public router:Router,
+    private usuarioService: UsuarioService,
+    public alertController: AlertController
+    ) { 
     this.formRegistro = formBuilder.group({
       
       nome: ['', Validators.compose(
@@ -91,7 +97,9 @@ public mensagens_validacao = {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.usuarioService.buscarTodos();
+    console.log(this.usuarioService.listaUsuarios);
   }
 
   public registro(){
@@ -102,4 +110,35 @@ public mensagens_validacao = {
     }
   }
 
+  public async salvarFormulario() {
+    if(this.formRegistro.valid){
+      let usuario = new Usuario();
+      usuario.nome = this.formRegistro.value.nome;
+      usuario.cpf = this.formRegistro.value.cpf;
+      usuario.dataNascimento = new Date (this.formRegistro.value.dataNascimento);
+      usuario.genero = this.formRegistro.value.genero;
+      usuario.email = this.formRegistro.value.email;
+      usuario.senha = this.formRegistro.value.senha;
+
+      if(await this.usuarioService.salvar(usuario)){
+        this.exibirAlerta('SUCESSO!', 'Usuário salvo com sucesso!');
+        this.router.navigateByUrl('/login');
+      } else{
+        this.exibirAlerta('ERRO!','Erro ao salvar o usuário!');
+      }
+
+  }else{
+      this.exibirAlerta('ASVERTÊNCIA!', 'Formulário inválido<br/>Verifique os campos do seu formulário!');
+  }
+
+}
+
+async exibirAlerta(titulo: string, mensagem: string) {
+  const alert = await this.alertController.create({
+    header: titulo,
+    message: mensagem,
+    buttons: ['OK']
+  });
+
+}
 }

@@ -18,10 +18,7 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
-  },  {
-    path: 'cpf-validators.ts',
-    loadChildren: () => import('./validators/cpf-validators.ts/cpf-validators.ts.module').then( m => m.CpfValidators.TsPageModule)
-  },
+  }
 
 ];
 
