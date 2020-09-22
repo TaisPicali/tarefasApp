@@ -1,4 +1,4 @@
-<ion-content color="danger" [fullscreem]="true">
+<ion-content color="danger">
   <img  src="assets/etec2.png" alt="Etec">
   <form [formGroup]="formLogin">
   <ion-card>
@@ -40,7 +40,7 @@
       <ion-label position="stacked">
         Manter Logado
       </ion-label>
-       <ion-checkbox slot="start"></ion-checkbox>
+       <ion-checkbox formControlName="manterLogado" slot="start"></ion-checkbox>
     </ion-item>
 
   </ion-card>
