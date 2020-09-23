@@ -128,7 +128,7 @@ public mensagens_validacao = {
       }
 
   }else{
-      this.exibirAlerta('ASVERTÊNCIA!', 'Formulário inválido<br/>Verifique os campos do seu formulário!');
+      this.exibirAlerta('ADVERTÊNCIA!', 'Formulário inválido. Verifique os campos do seu formulário!');
   }
 
 }

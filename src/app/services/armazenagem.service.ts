@@ -29,8 +29,8 @@ public salvarDados(chave: string, dados: any){
     if(chave.trim().length > 0) {
       return this.storage.get(chave)
       .then(dadosArmazenados => { 
-        return dadosArmazenados;}
-       )
+        return dadosArmazenados;
+      })
       .catch(erro => {
         console.log('Erro ao buscar os dados', erro);
         return null;
@@ -39,6 +39,20 @@ public salvarDados(chave: string, dados: any){
       return null;
     }
 
+  }
+
+  public removerDados(chave: string){
+    if(chave.trim().length > 0){
+      return this.storage.remove(chave)
+      .then(()=>{
+        return true;
+      })
+      .catch(erro=>{
+        return false;
+      });
+    }else{
+      return false;
+    }
   }
   
  
